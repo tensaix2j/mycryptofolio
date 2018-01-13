@@ -115,7 +115,10 @@ function SimpleList() {
 	this.show_loading_msg = function(msg) {
 			
 		console.log(msg);	
-		document.getElementById("loader_msg").innerHTML += ("<br/>" + msg );
+		var loader_msg = document.getElementById("loader_msg");
+		if ( loader_msg ) {
+			loader_msg.innerHTML += ("<br/>" + msg );
+		}
 
 	}
 
@@ -283,7 +286,7 @@ function SimpleList() {
 
 		var sl = this;
 		var proxy 		= "";
-		var targeturl 	= "http://api.fixer.io/latest?base=USD&symbols=SGD";
+		var targeturl 	= "https://api.fixer.io/latest?base=USD&symbols=SGD";
 		var useurl = proxy + targeturl
 
 		this.show_loading_msg("Querying fixer.io: for USDSGD rate" );
