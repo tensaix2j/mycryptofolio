@@ -34,6 +34,7 @@ function SimpleList() {
 	//--------------------
 	this.get_exchange_rates_high_priority = function() {
 		
+		this.get_fixer_exchange_rates();
 		this.get_binance_exchange_rates();
 	}
 
@@ -277,7 +278,25 @@ function SimpleList() {
 		
 	}
 
-	
+	//---------
+	this.get_fixer_exchange_rates = function( ) {
+
+		var sl = this;
+		var proxy 		= "";
+		var targeturl 	= "http://api.fixer.io/latest?base=USD&symbols=SGD";
+		var useurl = proxy + targeturl
+
+		this.show_loading_msg("Querying fixer.io: for USDSGD rate" );
+		
+		this.loadJSON(useurl, function( obj ) {
+			
+			sl.usdsgd = parseFloat( obj.rates["SGD"] );
+			sl.show_loading_msg("fixer.io query completed: USDSGD: " + sl.usdsgd );
+					 
+	    }, function(xhr) {
+	    	console.log("Error!");
+	    });
+	}
 
 
 
