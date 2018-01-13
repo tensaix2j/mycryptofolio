@@ -5,6 +5,7 @@ It also shows you, how much you own in term of USD, SGD, BTC and ETH for each di
 
 ![img](https://i.imgur.com/kweqLKi.png)
 
+You can also tap the symbol to go to tradingview.com, hitbtc, kucoin or okex directly depending on which is the provider of the data.
 
 
 
