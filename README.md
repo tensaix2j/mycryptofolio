@@ -1,5 +1,12 @@
 # mycryptofolio
-A Web App like Blockfolio, which can show multiple currencies in one glance for each coin holdings.
+Mycryptofolio is a web blockfolio, where it can show you for each coin at current price, what is the equivalent of USD, SGD, BTC and ETH at a glance.
+
+It also shows you, how much you own in term of USD, SGD, BTC and ETH for each different coin. Check the screenshot below:
+
+![img](https://i.imgur.com/kweqLKi.png)
+
+
+
 
 # How to use 
 
