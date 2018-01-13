@@ -3,7 +3,7 @@ A Web App like Blockfolio, which can show multiple currencies in one glance for 
 
 # How to use 
 
-To create a profile, simply go to jsonblob.com and create a json content as such 
+To create a profile, simply go to jsonblob.com and create a json format of your portfolio holdings as such: Below are for illustration purpose only: 
 
 For Example: 
 ```
@@ -60,5 +60,6 @@ The e6124640-f887-11e7-a727-b99d68134366 is the unique key for your profile
 Using the key, append ?profile=yourkey after the index.html on the url
   
 For example:
+
 https://tensaix2j.github.io/mycryptofolio/index.html?profile=e6124640-f887-11e7-a727-b99d68134366
 
