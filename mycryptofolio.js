@@ -495,9 +495,13 @@ function SimpleList() {
 				}
 
 
-				var chart_url = this.sprintf("http://tradingview.com/e?symbol=BINANCE:%s", pair );	
+				var chart_url = this.sprintf("http://tradingview.com/e?symbol=%s", pair );	
 				if ( provider == "hitbtc" ) {
-					var chart_url = this.sprintf("https://hitbtc.com/chart/%s", pair );	
+					chart_url = this.sprintf("https://hitbtc.com/chart/%s", pair );	
+				} else if ( provider == "kucoin" ) {
+					chart_url = this.sprintf("https://www.kucoin.com/#/trade/%s-ETH", symbol );
+				} else if ( provider == "okex" ) {
+					chart_url = "https://www.okex.com/spot.html";	
 				}
 
 				str += "<div class='curr_rate_header'>"
