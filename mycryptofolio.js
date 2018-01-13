@@ -58,7 +58,7 @@ function SimpleList() {
 	//----------
 	this.get_exchange_rates_cb = function( provider ) {
 		
-		console.log( provider );
+		this.show_loading_msg( provider + " query completed." );
 		this.queries_loaded += 1;
 		if ( this.queries_loaded >= this.total_queries ) {
 			this.calculate_total();
@@ -111,6 +111,14 @@ function SimpleList() {
 	}
 
 
+	//--------
+	this.stop_loading_msg = function() {
+		var loader_icon = document.getElementById("loader_icon");	
+		if ( loader_icon ) {
+			loader_icon.innerHTML = "";
+		}
+	}
+
 	//-------------------------------
 	this.show_loading_msg = function(msg) {
 			
@@ -156,7 +164,7 @@ function SimpleList() {
 			sl.get_exchange_rates_low_priority();
 			
 	    }, function(xhr) {
-	    	console.log("Error!");
+	    	sl.show_loading_msg("Error getting data from binance.");
 	    });
 	
 	}
@@ -185,7 +193,7 @@ function SimpleList() {
 			sl.get_exchange_rates_cb("hitbtc");
 			
 	    }, function(xhr) {
-	    	console.log("Error!");
+	    	sl.show_loading_msg("Error getting data from hitbtc.");
 	    });
 	
 	}
@@ -222,7 +230,7 @@ function SimpleList() {
 			sl.get_exchange_rates_cb("kucoin");
 			
 	    }, function(xhr) {
-	    	console.log("Error!");
+	    	sl.show_loading_msg("Error getting data from kucoin.");
 	    });
 		
 	}
@@ -251,7 +259,7 @@ function SimpleList() {
 			sl.get_exchange_rates_cb("okex");
 			
 	    }, function(xhr) {
-	    	console.log("Error!");
+	    	sl.show_loading_msg("Error getting data from okex.");
 	    });
 		
 	}
@@ -272,11 +280,13 @@ function SimpleList() {
 			if ( obj.success == true ) {
 				var price  	= parseFloat( obj.result.Last ); 
 				sl.common_extract("bittrex", base, quote, price );
+			} else {
+				sl.show_loading_msg("Error getting data from bittrex. " + base + quote);
 			}
 			sl.get_exchange_rates_cb("bittrex:" + base + quote + ":" + obj.success );
 						
 	    }, function(xhr) {
-	    	console.log("Error!");
+	    	sl.show_loading_msg("Error getting data from bittrex. " + base + quote);
 	    });
 		
 	}
@@ -297,7 +307,7 @@ function SimpleList() {
 			sl.show_loading_msg("fixer.io query completed: USDSGD: " + sl.usdsgd );
 					 
 	    }, function(xhr) {
-	    	console.log("Error!");
+	    	sl.show_loading_msg("Error getting data from fixer.io");
 	    });
 	}
 
@@ -373,7 +383,7 @@ function SimpleList() {
 	// Get user's holding from profile
 	this.get_holdings = function( profile_name , server ) {
 		
-		console.log( "get_holdings", profile_name , server );
+		this.show_loading_msg( "Retrieving Profile : " + profile_name + " from " + server );
 
 		var useurl ;
 		if ( server == "myjson" ) { 
@@ -415,7 +425,8 @@ function SimpleList() {
 			sl.get_exchange_rates();
 		    	    	
 	    }, function(xhr) {
-	    	console.log("Error!");
+	    	sl.show_loading_msg("Error Getting Profile from " + server );
+	    	sl.stop_loading_msg();
 	    });
 	}
 

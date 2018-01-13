@@ -7,17 +7,20 @@
 	<meta name="apple-mobile-web-app-title" content="Cryptotickers">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="mobile-web-app-capable" content="yes">
-	
+	<link rel="stylesheet" href="./cssloader.css?"/>
 	<link rel="stylesheet" href="./mycryptofolio.css?" />
-	<script src="./mycryptofolio.js?"></script>
+	<script src="./mycryptofolio.js?v=1.2"></script>
 
 	
 </head>
 
 <body>
 	<ul id="threadindex_list" class="threadindex_list">	
-		<li class='loader'></li>
-		<li class='loader'>Loading... Please wait..</li>
+		<li></li>
+		<li id='loader_icon' >
+			Loading... Please wait..
+			<a class='cssload-loader'><span class='cssload-loader-inner'></span></a>
+		</li>
 		<li id='loader_msg'></li>
 		
 	</ul>

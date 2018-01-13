@@ -118,6 +118,9 @@ hr {
     background-color: #444; /* Modern Browsers */
 }
 
+#loader_icon {
+	text-align: center;
+}
 #loader_msg {
 	font-size:12px;
 }
