@@ -8,6 +8,7 @@ function SimpleList() {
 	this.usdsgd 	    = 1.35;
 	this.queries_loaded = 0;
 	this.total_queries  = 11;
+	this.proxy = "https://cors-anywhere.herokuapp.com/";
 
 	//---------------
 	this.get_resources = function() {
@@ -135,10 +136,9 @@ function SimpleList() {
 
 		var sl = this;
 
-		var proxy 		= "https://cors-anywhere.herokuapp.com/";
 		var targeturl 	= "https://www.binance.com/api/v1/ticker/allPrices";
 			
-		var useurl = proxy + targeturl
+		var useurl = this.proxy + targeturl
 
 		
 		this.show_loading_msg("Querying Binance");
@@ -174,10 +174,10 @@ function SimpleList() {
 
 		var sl = this;
 
-		var proxy 		= "https://cors-anywhere.herokuapp.com/";
 		var targeturl 	= "https://api.hitbtc.com/api/1/public/ticker";
 			
-		var useurl = proxy + targeturl
+		var useurl = this.proxy + targeturl
+		//var useurl = targeturl;
 
 		this.show_loading_msg("Querying HitBTC");
 		
@@ -203,9 +203,9 @@ function SimpleList() {
 	this.get_kucoin_exchange_rates = function() {
 
 		var sl = this;
-		var proxy 		= "https://cors-anywhere.herokuapp.com/";
 		var targeturl 	= "https://api.kucoin.com/v1/open/tick";
-		var useurl = proxy + targeturl
+		//var useurl = this.proxy + targeturl
+		var useurl = targeturl;
 
 		this.show_loading_msg("Querying Kucoin");
 		
@@ -242,9 +242,9 @@ function SimpleList() {
 
 		// Just need the TIOBTC
 		var sl = this;
-		var proxy 		= "https://cors-anywhere.herokuapp.com/";
 		var targeturl 	= "https://www.okex.com/api/v1/ticker.do?symbol=" + base + "_" + quote;
-		var useurl = proxy + targeturl
+		var useurl = this.proxy + targeturl
+		//var useurl = targeturl;
 
 		this.show_loading_msg("Querying OKEX: " + base + quote );
 			
@@ -269,9 +269,9 @@ function SimpleList() {
 
 		// Just need the TIOBTC
 		var sl = this;
-		var proxy 		= "https://cors-anywhere.herokuapp.com/";
 		var targeturl 	= "https://bittrex.com/api/v1.1/public/getticker?market=" + quote + "-" + base ;
-		var useurl = proxy + targeturl
+		var useurl = this.proxy + targeturl
+		//var useurl = targeturl;
 
 		this.show_loading_msg("Querying BITTREX: " + base + quote );
 		
@@ -295,9 +295,9 @@ function SimpleList() {
 	this.get_fixer_exchange_rates = function( ) {
 
 		var sl = this;
-		var proxy 		= "";
 		var targeturl 	= "https://api.fixer.io/latest?base=USD&symbols=SGD";
-		var useurl = proxy + targeturl
+		//var useurl = this.proxy + targeturl
+		var useurl = targeturl;
 
 		this.show_loading_msg("Querying fixer.io: for USDSGD rate" );
 		
