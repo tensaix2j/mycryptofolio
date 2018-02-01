@@ -204,8 +204,8 @@ function SimpleList() {
 
 		var sl = this;
 		var targeturl 	= "https://api.kucoin.com/v1/open/tick";
-		//var useurl = this.proxy + targeturl
-		var useurl = targeturl;
+		var useurl = this.proxy + targeturl
+		//var useurl = targeturl;
 
 		this.show_loading_msg("Querying Kucoin");
 		
