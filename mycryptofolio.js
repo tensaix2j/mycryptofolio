@@ -74,7 +74,13 @@ function SimpleList() {
 				
 		if ( typeof sl.exchange_rates[base] != "undefined" &&
 			 ( typeof sl.exchange_rates[base].provider == "undefined" || 
-			 	sl.exchange_rates[base].provider == "binance" )  ) {
+			 	sl.exchange_rates[base].provider == "binance"  ) || 
+			 	(
+			 		typeof sl.exchange_rates[base] != "undefined" &&
+			 		typeof sl.exchange_rates[base].btc == "undefined" &&
+			 		typeof sl.exchange_rates[base].eth == "undefined" &&
+			 		typeof sl.exchange_rates[base].usd == "undefined"
+			 	)  ) {
 					
 			sl.exchange_rates[base].provider = provider ;
 				
@@ -215,16 +221,14 @@ function SimpleList() {
 			for ( i = 0 ; i < arr.length ; i++ ) {
 
 				var obj 	= arr[i]
-				var pair 	= obj.symbol ;
+				
 				var price  	= parseFloat( obj.lastDealPrice ); 
+				var base    = obj.coinType;
+				var quote   = obj.coinTypePair;
 
-				var quotelen = 3;
-				if ( pair.substr(pair.length - 4 , pair.length ) == "USDT" ) {
-					quotelen = 4;
+				if ( base == "KCS" ) {
+					console.log( base, quote, price );
 				}
-				var base    = pair.substr( 0, pair.length - (quotelen + 1) );
-				var quote   = pair.substr( pair.length - quotelen , pair.length );
-
 				sl.common_extract("kucoin", base, quote, price );
 			}
 			sl.get_exchange_rates_cb("kucoin");
