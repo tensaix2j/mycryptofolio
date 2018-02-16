@@ -333,8 +333,7 @@ function SimpleList() {
 		var sl = this;
 		var targeturl = "http://api.huobi.pro/market/detail/merged?symbol=" + base.toLowerCase() + quote.toLowerCase() ;
 		var useurl = this.proxy + targeturl
-		var useurl = targeturl;
-
+		
 		this.show_loading_msg("Querying huobi.pro: for rate" );
 		
 		this.loadJSON(useurl, function( obj ) {
@@ -367,8 +366,7 @@ function SimpleList() {
 		var sl = this;
 		var targeturl = "https://api.bibox.com/v1/mdata?cmd=market&pair=" + base + "_" + quote;
 		var useurl = this.proxy + targeturl
-		var useurl = targeturl;
-
+		
 		this.show_loading_msg("Querying bibox: for rate" );
 		
 		this.loadJSON(useurl, function( obj ) {
@@ -392,8 +390,7 @@ function SimpleList() {
 		var sl = this;
 		var targeturl = "https://www.cryptopia.co.nz/api/GetMarket/" + base + "_" + quote;
 		var useurl = this.proxy + targeturl
-		var useurl = targeturl;
-
+		
 		this.show_loading_msg("Querying cryptopia: for rate" );
 		
 		this.loadJSON(useurl, function( obj ) {
