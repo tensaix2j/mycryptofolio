@@ -17,7 +17,8 @@ function SimpleList() {
 	    var server  = this.get_querystring_value("server");
 
 	    if ( !profile ) {
-	    	profile = "831a4554-f848-11e7-a727-573ba0e3182e"
+	    	//profile = "831a4554-f848-11e7-a727-573ba0e3182e"
+	    	profile = "cee8ea07-e160-11e7-b884-1b54ec7f20bc"
 	    }
 	   	if ( !server ) {
 	        server = "jsonblob";
@@ -54,6 +55,15 @@ function SimpleList() {
 		this.get_bittrex_exchange_rates("GNT","BTC");
 		this.get_bittrex_exchange_rates("CLUB","BTC");
 		
+		this.get_huobi_exchange_rates("HT","BTC");
+		this.get_bibox_exchange_rates("BIX","BTC");
+		this.get_cryptopia_exchange_rates("ETN","BTC");
+
+	
+
+			
+		this.total_queries  = 14;
+				
 	}
 
 	//----------
@@ -316,7 +326,95 @@ function SimpleList() {
 	}
 
 
+	//---------
+	this.get_huobi_exchange_rates = function( base, quote ) {
 
+		//http://api.huobi.pro/market/detail/merged?symbol=htusdt
+		var sl = this;
+		var targeturl = "http://api.huobi.pro/market/detail/merged?symbol=" + base.toLowerCase() + quote.toLowerCase() ;
+		var useurl = this.proxy + targeturl
+		var useurl = targeturl;
+
+		this.show_loading_msg("Querying huobi.pro: for rate" );
+		
+		this.loadJSON(useurl, function( obj ) {
+			
+			if ( obj.status == "ok" ) {
+				
+				var price  	= parseFloat( obj.tick.bid[0] ); 
+				sl.common_extract("huobi", base , quote , price );
+				sl.get_exchange_rates_cb("huobi:" + base + quote );
+
+				
+			} else {
+
+				sl.show_loading_msg("Error getting data from huobi.pro " + obj.status );
+	    
+			}
+				
+
+	    }, function(xhr) {
+	    	sl.show_loading_msg("Error getting data from huobi.pro");
+	    
+	    });
+
+	}
+
+	//----
+	this.get_bibox_exchange_rates = function( base, quote ) {
+
+		//https://api.bibox.com/v1/mdata?cmd=market&pair=BIX_BTC
+		var sl = this;
+		var targeturl = "https://api.bibox.com/v1/mdata?cmd=market&pair=" + base + "_" + quote;
+		var useurl = this.proxy + targeturl
+		var useurl = targeturl;
+
+		this.show_loading_msg("Querying bibox: for rate" );
+		
+		this.loadJSON(useurl, function( obj ) {
+			
+			var price  	= parseFloat( obj.result.last ); 
+			sl.common_extract("bibox", base , quote , price );
+			sl.get_exchange_rates_cb("bibox:" + base + quote );
+					
+
+	    }, function(xhr) {
+	    	sl.show_loading_msg("Error getting data from bibox");
+	    
+	    });
+
+	}
+
+	//----
+	this.get_cryptopia_exchange_rates = function( base, quote ) {
+
+		//https://www.cryptopia.co.nz/api/GetMarket/ETN_BTC
+		var sl = this;
+		var targeturl = "https://www.cryptopia.co.nz/api/GetMarket/" + base + "_" + quote;
+		var useurl = this.proxy + targeturl
+		var useurl = targeturl;
+
+		this.show_loading_msg("Querying cryptopia: for rate" );
+		
+		this.loadJSON(useurl, function( obj ) {
+			
+			if ( obj.Success == true ) {
+				var price  	= parseFloat( obj.Data.LastPrice ); 
+				sl.common_extract("cryptopia", base , quote , price );
+				sl.get_exchange_rates_cb("cryptopia:" + base + quote );
+
+			} else {
+
+				sl.show_loading_msg("Error getting data from cryptopia. obj.Success == false");
+	
+			}		
+
+	    }, function(xhr) {
+	    	sl.show_loading_msg("Error getting data from cryptopia");
+	    
+	    });
+
+	}
 
 	//---------
 	this.calculate_total = function() {
