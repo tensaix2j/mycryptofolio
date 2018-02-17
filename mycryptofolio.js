@@ -82,15 +82,23 @@ function SimpleList() {
 	this.common_extract = function( provider, base, quote , price ) {
 
 				
-		if ( typeof sl.exchange_rates[base] != "undefined" &&
-			 ( typeof sl.exchange_rates[base].provider == "undefined" || 
-			 	sl.exchange_rates[base].provider == "binance"  ) || 
+		if  ( typeof sl.exchange_rates[base] != "undefined" &&
+			 	( typeof sl.exchange_rates[base].provider == "undefined" || 
+			 			 sl.exchange_rates[base].provider == "binance"  ) || 
 			 	(
-			 		typeof sl.exchange_rates[base] != "undefined" &&
-			 		typeof sl.exchange_rates[base].btc == "undefined" &&
-			 		typeof sl.exchange_rates[base].eth == "undefined" &&
-			 		typeof sl.exchange_rates[base].usd == "undefined"
-			 	)  ) {
+			 		typeof sl.exchange_rates[base] != "undefined" && (
+			 			(
+			 				typeof sl.exchange_rates[base].btc == "undefined" &&
+			 				typeof sl.exchange_rates[base].eth == "undefined" &&
+			 				typeof sl.exchange_rates[base].usd == "undefined"
+			 			) ||
+			 			(
+			 				( typeof sl.exchange_rates[base].btc == "undefined" && quote == "BTC" ) ||
+			 				( typeof sl.exchange_rates[base].eth == "undefined" && quote == "ETH" ) 
+			 			)
+			 		)
+			 	)  
+			) {
 					
 			sl.exchange_rates[base].provider = provider ;
 				
